@@ -20,7 +20,7 @@ torch==2.0.1+cpu
 torchaudio==2.0.2+cpu
 pytorch-lightning==2.0.2
 huggingface-hub==0.16.4
-soundfile==0.10.3.post1
+soundfile>=0.12.1
 tqdm
 requests
 humanfriendly
