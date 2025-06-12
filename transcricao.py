@@ -1,5 +1,5 @@
 """
-diarize_audio.py
+transcricao.py
 Script completo para diarização com compatibilidade garantida
 """
 
