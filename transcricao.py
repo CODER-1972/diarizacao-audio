@@ -119,13 +119,21 @@ def load_config():
 
 def get_audio_path(config):
     """Obtém caminho do áudio com verificação"""
-    audio_path = config['audio_path']
-    
-    while not os.path.exists(audio_path):
-        print(f"❌ Arquivo não encontrado: {audio_path}")
-        audio_path = input("Digite o caminho correto do arquivo de áudio: ").strip()
-    
-    return audio_path
+    audio_path = config.get('audio_path', '')
+
+    while True:
+        audio_path = audio_path.strip().strip('"\'')
+
+        if not audio_path:
+            print("❌ Caminho não pode estar vazio")
+        elif os.path.exists(audio_path):
+            return audio_path
+        else:
+            print(f"❌ Arquivo não encontrado: {audio_path}")
+
+        audio_path = input(
+            "Digite o caminho correto do arquivo de áudio: ")\
+                .strip().strip('"\'')
 
 def initialize_pipeline(hf_token):
     """Inicializa o pipeline de diarização com tratamento de erros"""
