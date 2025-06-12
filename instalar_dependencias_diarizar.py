@@ -14,11 +14,11 @@ requirements = """
 pip<24.1
 faster-whisper==1.1.1
 ctranslate2==4.6.0
-tokenizers==0.21.1
-pyannote.audio==2.1.1
-torch==1.10.0
-torchaudio==0.10.0
-pytorch_lightning==1.5.9
+tokenizers==0.13.3
+pyannote.audio==3.1.1
+torch==2.0.1+cpu
+torchaudio==2.0.2+cpu
+pytorch-lightning==2.0.2
 huggingface-hub==0.16.4
 soundfile==0.10.3.post1
 tqdm
@@ -26,7 +26,8 @@ requests
 humanfriendly
 coloredlogs
 av
-numpy==1.23.5 
+numpy==1.24.4
+--extra-index-url https://download.pytorch.org/whl/cpu
 """
 
 # Conteúdo do ficheiro YAML do ambiente Conda
