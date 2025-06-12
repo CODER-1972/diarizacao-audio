@@ -1,5 +1,5 @@
 """
-diarize_audio.py
+diarizacao.py
 Script para diarização de áudio com compatibilidade melhorada.
 Identifica oradores e agrupa falas consecutivas.
 """
