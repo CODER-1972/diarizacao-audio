@@ -10,7 +10,6 @@ import sys
 import subprocess
 import tempfile
 import shutil
-import numpy as np
 from datetime import datetime
 from pathlib import Path
 from tqdm import tqdm
@@ -152,28 +151,6 @@ def split_audio(audio_path, chunk_duration, overlap):
     print(f"✅ {len(chunks)} blocos criados em {temp_dir}")
     return chunks, temp_dir
 
-class SpeakerTracker:
-    """Rastreia oradores de forma simples baseado em características temporais"""
-    
-    def __init__(self):
-        self.speakers = {}
-        self.counter = 0
-    
-    def get_or_create_speaker(self, segment_info):
-        """Obtém ou cria ID de orador baseado em características simples"""
-        # Características simples baseadas em timing
-        avg_duration = np.mean([s["end"] - s["start"] for s in segment_info])
-        
-        # Procura orador similar
-        for speaker_id, features in self.speakers.items():
-            if abs(features["avg_duration"] - avg_duration) < 0.5:  # Tolerância de 0.5s
-                return speaker_id
-        
-        # Cria novo orador
-        self.counter += 1
-        new_id = f"ORADOR_{self.counter:02d}"
-        self.speakers[new_id] = {"avg_duration": avg_duration}
-        return new_id
 
 def diarize_chunk_simple(chunk, pipeline):
     """Executa diarização em um bloco usando pyannote"""
