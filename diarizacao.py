@@ -26,6 +26,7 @@ torchaudio>=2.0.0
 pyannote.audio>=3.1.0
 pytorch-lightning>=2.0.0
 transformers>=4.20.0
+tokenizers>=0.11.1,!=0.11.3,<0.14
 speechbrain>=0.5.15
 numpy>=1.21.0
 tqdm>=4.64.0
@@ -65,27 +66,38 @@ def load_config():
     return default_config
 
 def check_dependencies():
-    """Verifica se as dependências estão instaladas"""
+    """Verifica se as dependências estão instaladas e em versões compatíveis"""
     try:
         import torch
         import pyannote.audio
         from pyannote.audio import Pipeline
-        
+        import tokenizers
+        from packaging.version import parse as parse_version
+
         # Verifica versões
         torch_version = torch.__version__
         pyannote_version = pyannote.audio.__version__
-        
+        tokenizers_version = tokenizers.__version__
+
         print(f"📦 PyTorch: {torch_version}")
         print(f"📦 pyannote.audio: {pyannote_version}")
-        
+        print(f"📦 tokenizers: {tokenizers_version}")
+
         # Verifica se as versões são compatíveis
         torch_major = int(torch_version.split('.')[0])
         if torch_major < 2:
             print("⚠️ PyTorch < 2.0 pode causar problemas")
             return False
-        
+
+        tk_v = parse_version(tokenizers_version)
+        if (tk_v < parse_version("0.11.1") or
+                tk_v >= parse_version("0.14") or
+                tk_v == parse_version("0.11.3")):
+            print("⚠️ Versão de tokenizers incompatível")
+            return False
+
         return True
-        
+
     except ImportError as e:
         print(f"❌ Dependência não encontrada: {e}")
         return False
