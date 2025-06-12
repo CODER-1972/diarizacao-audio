@@ -15,6 +15,7 @@ from pathlib import Path
 from tqdm import tqdm
 from configparser import ConfigParser
 import warnings
+import torch
 
 # Configuração de warnings
 warnings.filterwarnings("ignore", category=UserWarning)
