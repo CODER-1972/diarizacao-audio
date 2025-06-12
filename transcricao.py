@@ -36,7 +36,7 @@ def create_config_file():
     """Cria arquivo de configuração separado"""
     config_content = f"""[config]
 audio_path = {str(Path.home() / "audio-to-text.wav")}
-chunk_duration_transcribe = 900
+chunk_duration_transcribe = 300
 chunk_duration_diarize = 600
 overlap_diarize = 3
 pause_threshold = 1.5
